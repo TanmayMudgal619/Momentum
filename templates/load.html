@@ -1,0 +1,24 @@
+{% extends "main.html" %}
+{% block content %}
+<form id="myForm" action="/" method="POST" style="visibility: hidden;">
+    <input type="text" id="lat" name="lat">
+    <input type="text" id="lon" name="lon">
+</form>
+<script>
+    var x = document.getElementById("lat");
+    var y = document.getElementById("lon");
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+        else { x.innerHTML = "Geolocation is not supported by this browser."; }
+    }
+    function showPosition(position) {
+        x.value = position.coords.latitude;
+        y.value = position.coords.longitude;
+        document.getElementById("myForm").submit();
+    }
+    getLocation()
+
+</script>
+{% endblock %}

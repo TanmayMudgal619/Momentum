@@ -1,0 +1,19 @@
+{% extends "main.html" %}
+{% block content %}
+<center>
+    <div
+        style="background-color: white;opacity: 0.8;color: #000;position: absolute;top:10%;right:10%;margin: 0px;padding: 20px;border-radius: 10px;">
+        <img src="http://openweathermap.org/img/wn/{{temp.weather[0]['icon']}}@2x.png">
+        <br>
+        <hr>
+        {{temp.mtemp}} °C
+        <br>
+        {{ temp.weather[0]["main"] }}
+    </div>
+    <div
+        style="background-color: black;opacity: 0.8;color: #fff;position: absolute;bottom:0%;width: 100%;margin: 0px;padding: 0px;">
+        <p style="font-size: xx-large;">{{quote.quote}}</p>
+        <p>{{quote.author}}</p>
+    </div>
+</center>
+{% endblock %}
