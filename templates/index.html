@@ -1,6 +1,9 @@
 {% extends "main.html" %}
 {% block content %}
 <center>
+    <div class="link">
+        <input type="text" class="query" name="" value="" />
+    </div>
     <div
         style="background-color: white;opacity: 0.8;color: #000;position: absolute;top:10%;right:10%;margin: 0px;padding: 20px;border-radius: 10px;">
         <img src="http://openweathermap.org/img/wn/{{temp.weather[0]['icon']}}@2x.png">
@@ -10,10 +13,55 @@
         <br>
         {{ temp.weather[0]["main"] }}
     </div>
+    <div id="clock" class="watch">
+        <div id="time">
+            <div id="hours">00</div>
+            <span class="colon"> :</span>
+            <div id="minutes">00</div>
+        </div>
+    </div>
     <div
         style="background-color: black;opacity: 0.8;color: #fff;position: absolute;bottom:0%;width: 100%;margin: 0px;padding: 0px;">
         <p style="font-size: xx-large;">{{quote.quote}}</p>
         <p>{{quote.author}}</p>
     </div>
 </center>
+<script type="text/javascript">
+    function clock() {
+        var hours = document.getElementById("hours");
+        var minutes = document.getElementById("minutes");
+        var seconds = document.getElementById("seconds");
+
+        var h = new Date().getHours();
+        var m = new Date().getMinutes();
+        var s = new Date().getSeconds();
+
+        hours.innerHTML = (h >= 0 && h < 10) || (h >= 12 && h <= 21) ? "0".concat(h % 12) : h % 12;
+        minutes.innerHTML = m < 10 ? "0".concat(m) : m;
+        seconds.innerHTML = s;
+        function message() {
+            if (h >= 0 && h <= 12) {
+                var greet = "Good Morning , Shailendra";
+
+                document.getElementById("greetings").innerHTML = greet;
+            } else if (h >= 12 && h <= 18) {
+                var greet = "Good Afternoon , Shailendra";
+
+                document.getElementById("greetings").innerHTML = greet;
+            } else {
+                var greet = "Good Evening , Shailendra";
+
+                document.getElementById("greetings").innerHTML = greet;
+            }
+        }
+    }
+    var interval = setInterval(clock, 1000);
+    let query = document.querySelector(".query");
+    document.querySelector(".query").addEventListener("keypress", function (e) {
+        if (e.key == "Enter") {
+            let url = "https://www.google.com/search?q=" + query.value;
+            window.open(url, "_blank");
+        }
+    });
+</script>
 {% endblock %}
